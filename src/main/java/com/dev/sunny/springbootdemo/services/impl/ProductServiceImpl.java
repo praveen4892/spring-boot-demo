@@ -34,6 +34,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto addProduct(Product product) {
+        if (product != null && product.getProductName() != null && product.getDescription() != null)
+            product.setProductId(this.productMap.size() + 1L);
+        else return null;
+
         productMap.put(product.getProductId(), product);
         Product savedProduct = productMap.get(product.getProductId());
         return ProductDto.productToProductDto(savedProduct);
